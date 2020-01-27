@@ -11,15 +11,16 @@ export default class ToDoItem extends React.Component {
 
         }
     }
+    
 
     render(){
         const {id, title, completed} = this.props.todo
         return(
             <div style = {this.getStyle()}>
                 <p>
-                    <input type = 'checkbox' onChange = {this.props.markComplete.bind(this, id)}/> {' '}
+                    <input type = 'checkbox' onChange = {() => this.props.markComplete(id)}/> {' '}
                     {title} {' '}
-                    <button style = {btnStyle} onClick = {this.props.deleteTodo.bind(this,id)}>Delete</button>
+                    <button style = {btnStyle} onClick = {() => this.props.deleteTodo(id)}>Delete</button>
                 </p>
             </div>
         );
@@ -31,6 +32,7 @@ const btnStyle  = {
     borderRadius: '5px'
 }
 
+//when to use? 
 ToDoItem.propTypes = {
     todo: PropTypes.object.isRequired
 }

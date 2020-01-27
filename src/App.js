@@ -40,11 +40,10 @@ class App extends React.Component {
   // Deletes a todo
   deleteTodo = (id) => {
     this.setState({todos: this.state.todos.filter((todo)=> todo.id !== id)})
-    // whats the difference?
-    // this.setState({todos: [...this.state.todos.filter((todo)=> todo.id !== id)]})
   }
 
   addToDo = (newTask) => {
+    //Something worth doing?
     newTask['id'] = uuid.v4()
     newTask['completed'] = false
     this.setState({todos: [...this.state.todos, newTask]})
@@ -54,9 +53,9 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        < Header />
+        <Header />
         <AddToDo addToDo = {this.addToDo}/>
-        < ToDos todos = {this.state.todos} markComplete ={this.markComplete} deleteTodo = {this.deleteTodo}/>
+        <ToDos todos = {this.state.todos} markComplete ={this.markComplete} deleteTodo = {this.deleteTodo}/>
       </div>
     );
 
