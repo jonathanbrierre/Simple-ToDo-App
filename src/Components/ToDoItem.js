@@ -8,7 +8,6 @@ export default class ToDoItem extends React.Component {
             textDecoration: (this.props.todo.completed ? 'line-through' : 'none'),
             padding: '10px',
             borderBottom: '1px black dotted'
-
         }
     }
     
