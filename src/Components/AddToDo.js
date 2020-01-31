@@ -12,6 +12,7 @@ export class AddToDo extends Component {
         this.props.addToDo(this.state)
         this.setState({title: ''})
     }
+    
     render() {
         return (
             <form onSubmit = {this.onSubmit} style = {{ backgroundColor: '#333', display: 'flex'}}>

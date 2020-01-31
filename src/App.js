@@ -4,9 +4,11 @@ import ToDos from './Components/ToDos';
 import Header from './Components/layout/Header'
 import AddToDo from './Components/AddToDo';
 import uuid from 'uuid'
+import Search from './Components/Search';
 
 
 class App extends React.Component {
+  
   state = {
     todos: [
       {
@@ -24,16 +26,19 @@ class App extends React.Component {
         title: 'Take over the world',
         completed: false
       }
-    ]
+    ],
+    search: ''
   }
   // Toggle complete
   markComplete = (id) => {
-    this.setState({ todos: this.state.todos.map((task)=>{
-      if(task.id === id){
-        task.completed = !task.completed
-      }
-      return task
-      })
+    this.setState(prevState => {
+      const todosArray = prevState.todos.map((task)=>{
+        if(task.id === id){
+            task.completed = !task.completed
+        }
+        return task
+        })
+      return {todos: todosArray}
     })
   }
 
@@ -49,17 +54,28 @@ class App extends React.Component {
     this.setState({todos: [...this.state.todos, newTask]})
   }
 
+  changeStateSearch = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  dynamicSearch = () => {
+    let filteredList = this.state.todos.filter(todo => todo.title.toLowerCase().includes(this.state.search.toLowerCase()))
+    return filteredList
+  }
+
 
   render(){
     return (
       <div className="App">
         <Header />
+        <Search search = {this.state.search} changeStateSearch = {this.changeStateSearch}/>
         <AddToDo addToDo = {this.addToDo}/>
-        <ToDos todos = {this.state.todos} markComplete ={this.markComplete} deleteTodo = {this.deleteTodo}/>
+        <ToDos todos = {this.dynamicSearch()} markComplete ={this.markComplete} deleteTodo = {this.deleteTodo}/>
       </div>
     );
 
   }
 }
+
 
 export default App;
